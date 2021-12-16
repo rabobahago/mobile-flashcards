@@ -1,19 +1,19 @@
-import { AsyncStorage } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const DECK_DB_KEY = "RaboYusuf:MobileFlashcards_Deck";
+export const DECK_DB_KEY = "RaboYusuf:MobileFlashcards_Deck";
 
-const getDecks = async () => {
+export const getDecks = async () => {
   const decks = await AsyncStorage.getItem(DECK_DB_KEY);
   return JSON.parse(decks);
 };
 
-const getDeck = async (key) => {
+export const getDeck = async (key) => {
   const decks = await AsyncStorage.getItem(DECK_DB_KEY);
   const json = JSON.parse(decks);
   return json[key];
 };
 
-const removeDeck = async (key) => {
+export const removeDeck = async (key) => {
   const decks = await AsyncStorage.getItem(DECK_DB_KEY);
   let data = JSON.parse(decks);
   data[key] = undefined;
@@ -22,11 +22,11 @@ const removeDeck = async (key) => {
   return await getDecks();
 };
 
-const clearAll = async () => {
+export const clearAll = async () => {
   await AsyncStorage.clear();
 };
 
-const saveDeckTitle = async (title) => {
+export const saveDeckTitle = async (title) => {
   const deckProperties = {
     [title]: {
       title: title,
@@ -38,20 +38,11 @@ const saveDeckTitle = async (title) => {
   return await getDecks();
 };
 
-const addCardToDeck = async (title, card) => {
+export const addCardToDeck = async (title, card) => {
   const deck = await AsyncStorage.getItem(DECK_DB_KEY);
   let data = JSON.parse(deck);
   data[title].questions.push(card);
   await AsyncStorage.setItem(DECK_DB_KEY, JSON.stringify(data));
 
   return await getDecks();
-};
-
-module.exports = {
-  getDecks,
-  getDeck,
-  removeDeck,
-  clearAll,
-  saveDeckTitle,
-  addCardToDeck
 };

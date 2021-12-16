@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
-import { AppLoading, Asset, Font, Icon } from "expo";
+import AppLoading from "expo-app-loading";
+import { Asset } from "expo-asset";
+import * as Font from "expo-font";
+import { Ionicons } from "@expo/vector-icons";
 import AppNavigator from "./navigation/AppNavigator";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
@@ -18,7 +21,7 @@ const App = (props) => {
         require("./assets/images/robot-prod.png")
       ]),
       Font.loadAsync({
-        ...Icon.Ionicons.font,
+        ...Ionicons.font,
         "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf")
       })
     ]);
