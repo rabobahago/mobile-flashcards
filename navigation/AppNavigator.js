@@ -1,5 +1,5 @@
-import { createAppContainer, createStackNavigator } from "react-navigation";
-
+import { createStackNavigator } from "react-navigation-stack";
+import { createAppContainer } from "react-navigation";
 import AllDecksScreen from "../screens/AllDecks";
 import NewDeckScreen from "../screens/NewDeck";
 import NewCardScreen from "../screens/NewCard";
