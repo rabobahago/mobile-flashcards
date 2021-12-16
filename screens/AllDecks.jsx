@@ -101,11 +101,11 @@ class AllDecks extends React.Component {
     );
   }
 }
-function mapStateToProps(decks) {
+const mapStateToProps = (decks) => {
   return {
     decks: decks ? decks : null
   };
-}
+};
 export default connect(mapStateToProps)(AllDecks);
 
 const styles = StyleSheet.create({
