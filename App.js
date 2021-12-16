@@ -1,21 +1,60 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { Platform, StatusBar, StyleSheet, View } from "react-native";
+import { AppLoading, Asset, Font, Icon } from "expo";
+import AppNavigator from "./navigation/AppNavigator";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import reducer from "./reducers/decks";
+import middleware from "./middleware";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+const store = createStore(reducer, middleware);
 
+const App = (props) => {
+  const [isLoadingComplete, setIsLoadingComplete] = useState(false);
+  const _loadResourcesAsync = async () => {
+    return Promise.all([
+      Asset.loadAsync([
+        require("./assets/images/robot-dev.png"),
+        require("./assets/images/robot-prod.png")
+      ]),
+      Font.loadAsync({
+        ...Icon.Ionicons.font,
+        "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf")
+      })
+    ]);
+  };
+
+  const _handleLoadingError = (error) => {
+    console.warn(error);
+  };
+
+  const _handleFinishLoading = () => {
+    setIsLoadingComplete({ isLoadingComplete: true });
+  };
+
+  if (!isLoadingComplete && !props.skipLoadingScreen) {
+    return (
+      <AppLoading
+        startAsync={_loadResourcesAsync}
+        onError={_handleLoadingError}
+        onFinish={_handleFinishLoading}
+      />
+    );
+  } else {
+    return (
+      <Provider store={store}>
+        <View style={styles.container}>
+          {Platform.OS === "ios" && <StatusBar barStyle="default" />}
+          <AppNavigator />
+        </View>
+      </Provider>
+    );
+  }
+};
+export default App;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    backgroundColor: "#fff"
+  }
 });
