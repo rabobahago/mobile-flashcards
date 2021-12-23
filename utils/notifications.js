@@ -39,10 +39,10 @@ export const setLocalNotification = () => {
             tomorrow.setDate(tomorrow.getDate() + 1);
             tomorrow.setHours(18);
 
-            // Notifications.scheduleLocalNotificationAsync(createNotification(), {
-            //   time: tomorrow,
-            //   repeat: "day"
-            // });
+            Notifications.scheduleLocalNotificationAsync(createNotification(), {
+              time: tomorrow,
+              repeat: "day"
+            });
 
             AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
           }

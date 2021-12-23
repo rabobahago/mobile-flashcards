@@ -14,7 +14,7 @@ class Quiz extends React.Component {
 
   state = {
     counter: 0,
-    showQuestion: true,
+    showQuestion: false,
     correct: 0,
     completed: false
   };
