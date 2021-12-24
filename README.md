@@ -1,7 +1,7 @@
 Mobile Flashcards
 React Nanodegree Mobile Flashcards app is an app where users can add cards to each deck and answer questions from each deck daily. It is built with React Native & Redux.
 
-While React Native Mobile Flashcards should work on all iOS devices, it has been official tested on iPhone 7 (device) running iOS 11.4 - iPhone XR (simulator)
+While React Native Mobile Flashcards should work on all iOS devices, it has been official tested on android tecno 7 spark pro and iPhone 7 (device) running iOS 11.4 - iPhone XR (simulator)
 
 Requirements
 This application was bootstrapped with create-react-native-app.
